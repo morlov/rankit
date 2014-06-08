@@ -3,25 +3,11 @@
 <html>
 <head> 
 	<title>Rankit | Sort</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-	
-	<script>
-	$(function() {
-		$( "#sortable" ).sortable({ 
-		                        revert: true, 
-		                        update: function(event, ui) {
-                                i = 1
-                                $(this).children().each(function(idx, val){
-								       $(this).find(">:first-child").html(i);
-                                       i++; })	
-								}
-		});
-		$( "#sortable" ).disableSelection();
-	});
-    </script>
+    <script type='text/javascript' src='../js/script.js'></script>
 </head>
 
 <body>

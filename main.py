@@ -14,12 +14,43 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-import webapp2
 
-class MainHandler(webapp2.RequestHandler):
+import os
+import webapp2
+import jinja2
+
+template_dir = os.path.join(os.path.dirname(__file__), 'html')
+jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), autoescape=True)
+
+class Handler(webapp2.RequestHandler):
+    
+    def write(self, *a, **kw):
+        self.response.out.write(*a, **kw)
+        
+    def render_str(self, template, **params):
+        temp = jinja_env.get_template(template)
+        return temp.render(params)
+
+    def render(self, template, **kw):
+        self.write(self.render_str(template, **kw))
+
+class Main(Handler):
+
     def get(self):
-        self.response.write('Hello world!')
+        self.render("main.html")
+
+class New(Handler):
+
+    def get(self):
+        self.render("new.html")
+
+class Sort(Handler):
+
+    def get(self):
+        self.render("sort.html")
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
-], debug=True)
+    ('/', Main),
+    ('/new', New),
+    ('/sort', Sort)
+    ], debug=True)

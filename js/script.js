@@ -14,3 +14,17 @@ function addItem() {
 		elem.appendChild(item)
     }
 }
+
+$(function() {
+	$( "#sortable" ).sortable({ 
+							    revert: true, 
+		                        update: function(event, ui) {
+                                i = 1
+                                $(this).children().each(function(idx, val){
+								    $(this).find(">:first-child").html(i);
+                                    i++; 
+                                	})	
+								}
+		});
+		$( "#sortable" ).disableSelection();
+	});
