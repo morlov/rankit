@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html>
+<head> 
+	<title>Rankit | Sort</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	
+	<script>
+	$(function() {
+		$( "#sortable" ).sortable({ 
+		                        revert: true, 
+		                        update: function(event, ui) {
+                                i = 1
+                                $(this).children().each(function(idx, val){
+								       $(this).find(">:first-child").html(i);
+                                       i++; })	
+								}
+		});
+		$( "#sortable" ).disableSelection();
+	});
+    </script>
+</head>
+
+<body>
+	<div id="content">
+		<div id="header">
+			<div class="header-logo">
+				<a href="main.html">RANKIT</a>
+			</div>
+			<div class="header-links">
+				<a href="main.html">Mikhail</a>
+			</div>
+		</div>
+
+		<form class="new-ranking" method="post">
+			<div class="ranking-header">
+				<span class="ranking-title">The Top 5 Web Browsers</span>
+			</div>
+			<div id="sortable">
+				<div class="ranking-item">
+					<span class="item-rank">1</span>
+					<span class="item-name">Mozilla Firefox</span>
+				</div>
+				<div class="ranking-item">
+					<span class="item-rank">2</span>
+					<span class="item-name">Google Chrome</span>
+				</div>
+				<div class="ranking-item">
+					<span class="item-rank">3</span>
+					<span class="item-name">Safari</span>
+				</div>
+				<div class="ranking-item">
+					<span class="item-rank">4</span>
+					<span class="item-name">Opera</span>
+				</div>
+				<div class="ranking-item">
+					<span class="item-rank">5</span>
+					<span class="item-name">Internet Explorer</span>
+				</div>
+			</div>
+			<div class="ranking-footer">
+			    <a href = "main.html">
+				<input class="post-ranking" type="button" value="Cancel" method="post">
+				</a>
+				<input class="post-ranking" type="button" value="Submit" method="post">
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>

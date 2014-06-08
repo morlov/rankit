@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+<head> 
+	<title>Rankit | New ranking</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script type='text/javascript' src='script.js'></script>
+	
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	
+	<script>
+	$(function() {
+		$( "#sortable" ).sortable({ 
+		                        revert: true, 
+		                        update: function(event, ui) {
+                                i = 1
+                                $(this).children().each(function(idx, val){
+								       $(this).find(">:first-child").html(i);
+                                       i++; })	
+								}
+		});
+		$( "#sortable" ).disableSelection();
+	});
+    </script>
+	
+</head>
+
+<body>
+	<div id="content">
+		<div id="header">
+			<div class="header-logo">
+				<a href="main.html">RANKIT</a>
+			</div>
+			<div class="header-links">
+				<a href="main.html">Mikhail</a>
+			</div>
+		</div>
+
+		<form class="new-ranking" method="post">
+			<div class="ranking-header">
+				<span class="ranking-title">
+					<input class="ranking-title-input" type="text" placeholder="Enter ranking title...">
+				</span>
+			</div>
+			<div id="sortable">
+			</div>
+			<div class="ranking-item">
+				<span class="item-name">
+					<input class="item-name-input" type="text" placeholder="Enter item name and press add..." id="item-text">
+				</span>
+			</div>
+			<div class="ranking-footer">
+				<input class="post-ranking" type="button" value="Post" method="post">
+				<input class="post-ranking" type="button" value="Add" onclick="addItem()">		
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>
