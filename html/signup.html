@@ -3,17 +3,17 @@
 <html>
 <head> 
 	<title>Rankit | Sign up</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 
 <body>
 	<div id="content">
 		<div id="header">
 			<div class="header-logo">
-				<a href="main.html">RANKIT</a>
+				<a href="/">RANKIT</a>
 			</div>
 			<div class="header-links">
-				<a href="signin.html">Sign in</a>
+				<a href="/signin">Sign in</a>
 			</div>
 		</div>
 
@@ -25,27 +25,28 @@
 			</div>
 			<div class="ranking-item">
 				<span class="item-name">
-					<input class="item-name-input" type="text" placeholder="Email">
+					<input class="item-name-input" type="text" placeholder="Email" name='email' value="{{email}}">
 				</span>
 			</div>
 			<div class="ranking-item">
 				<span class="item-name">
-					<input class="item-name-input" type="password" placeholder="Password">
+					<input class="item-name-input" type="password" placeholder="Password" name='password' value="{{password}}">
 				</span>
 			</div>
 			<div class="ranking-item">
 				<span class="item-name">
-					<input class="item-name-input" type="password" placeholder="Verify password">
+					<input class="item-name-input" type="password" placeholder="Verify password" name='verify' value="{{verify}}">
 				</span>
 			</div>
 			<div class="ranking-item">
 				<span class="item-name">
-					<input class="item-name-input" type="text" placeholder="Username">
+					<input class="item-name-input" type="text" placeholder="Username" name='username' value="{{username}}">
 				</span>
 			</div>
 			<div class="ranking-footer">
-				<input class="post-ranking" type="button" value="OK">
+				<input class="post-ranking" type="submit" value="OK">
 			</div>
+			<span class="signup-error">{{error_login}}</span>
 		</form>
 	</div>
 </body>

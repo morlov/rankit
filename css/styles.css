@@ -199,3 +199,7 @@ body {
 	font-size: 18px;
 	color: #555;
 }
+
+.signup-error {
+	color: red;
+}
