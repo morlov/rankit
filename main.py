@@ -68,15 +68,17 @@ class Handler(webapp2.RequestHandler):
 class Main(Handler):
 
     def get(self):
-        user_name = self.request.cookies.get('user_name')
-        if not user_name:
-            self.redirect("/signup")
-        self.render_main()
+        h = self.request.cookies.get('user_name')
+        if h:
+            user_name = check_secure_val(h)
+            if user_name:
+                self.render_main()
+        self.redirect("/signup")
 
     def render_main(self):
         #posts = db.GqlQuery("select * from Post order by created desc")        
         #self.render("blog.html", posts=posts)
-        user_name = self.request.cookies.get('user_name').split('|')[0]
+        user_name = self.request.cookies.get('user_name')
         self.render('main.html', user_name=user_name)
 
 class New(Handler):
@@ -161,7 +163,7 @@ class Signin(Handler):
 class Signout(Handler):
 
     def get(self):
-        self.response.headers.add_header('Set-Cookie', 'user_name=;Path=/')
+        self.response.headers.add_header('Set-Cookie', 'Path=/')
         self.redirect('/')
 
 app = webapp2.WSGIApplication([
