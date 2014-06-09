@@ -39,9 +39,19 @@ def check_secure_val(h):
         return val
 
 class User(db.Model):
-	username = db.StringProperty(required = True)
+	user_name = db.StringProperty(required = True)
 	password = db.StringProperty(required = True)
 	email    = db.StringProperty(required = True)
+
+class Ranking(db.Model):
+	user_name  = db.StringProperty(required = True)
+	ranking_name = db.StringProperty(required = True)
+	item_name = db.StringProperty(required = True)
+	rank  = db.StringProperty(required = True)
+
+class Item(db.Model):
+	item_name    = db.StringProperty(required = True)
+	content = db.StringProperty(required = True)
 
 class Handler(webapp2.RequestHandler):
     
@@ -57,44 +67,52 @@ class Handler(webapp2.RequestHandler):
 
 class Main(Handler):
 
-	def render_main(self):
-		#posts = db.GqlQuery("select * from Post order by created desc")        
-		#self.render("blog.html", posts=posts)
-		username = self.request.cookies.get('username').split('|')[0]
-		self.render('main.html', username=username)
+    def get(self):
+        user_name = self.request.cookies.get('user_name')
+        if not user_name:
+            self.redirect("/signup")
+        self.render_main()
 
-	def get(self):
-		username = self.request.cookies.get('username')
-		if not username:
-			self.redirect('/signup')
-		self.render_main()
+    def render_main(self):
+        #posts = db.GqlQuery("select * from Post order by created desc")        
+        #self.render("blog.html", posts=posts)
+        user_name = self.request.cookies.get('user_name').split('|')[0]
+        self.render('main.html', user_name=user_name)
 
 class New(Handler):
 
     def get(self):
-        self.render("new.html")
+    	user_name = self.request.cookies.get('user_name').split('|')[0]
+        self.render("new.html",user_name=user_name)
 
 class Sort(Handler):
 
     def get(self):
-    	username = self.request.cookies.get('username').split('|')[0]
-        self.render("sort.html", username=username)
-
-class Signup(Handler):
-
-    def get(self):
-        self.render("signup.html")
+    	user_name = self.request.cookies.get('user_name').split('|')[0]
+        self.render("sort.html", user_name=user_name)
 
 USER_RE   = re.compile(r"^[a-zA-Z0-9_-]{3,20}$")
 PASS_RE   = re.compile(r"^.{3,20}$")
 EMAIL_RE  = re.compile(r"^[\S]+@[\S]+\.[\S]+$")
 
-def valid_username(username):
-    return username and USER_RE.match(username)
+def valid_user_name(user_name):
+    return user_name and USER_RE.match(user_name)
 def valid_password(password):
     return password and PASS_RE.match(password)
 def valid_email(email):
     return email and EMAIL_RE.match(email)
+
+def valid_signup(self, email, password, verify, user_name, user):
+    if not valid_email(email):
+        return "That's not a valid email."
+    if not valid_password(password):
+        return "That's a valid password."
+    if password != verify:
+        return "Your passwords didn't match."
+    if not valid_user_name(user_name):
+        return "That's not a valid username."
+    if user:
+        return "This user already exists."
 
 class Signup(Handler):
 
@@ -103,40 +121,26 @@ class Signup(Handler):
 
     def post(self):
         
-        username = self.request.get('username')
+        user_name = self.request.get('user_name')
         password = self.request.get('password')
-        verify   = self.request.get('verify')
-        email    = self.request.get('email')
+        verify = self.request.get('verify')
+        email = self.request.get('email')
+        user = db.GqlQuery("SELECT * FROM User WHERE user_name=:user_name", user_name=user_name).get()
 
-        user = db.GqlQuery("SELECT * FROM User WHERE username=:username", username=username).get()
-
-        error_login = None
-
-        if not valid_email(email):
-            error_login = "That's not a valid email."
-        elif not valid_password(password):
-            error_login  = "That's a valid password."
-        elif password != verify:
-            error_login  = "Your passwords didn't match."
-        elif not valid_username(username):
-            error_login = "That's not a valid username."
-        elif user:
-            error_login = "This user already exists." 
-
+        error_login = valid_signup(self, email, password, verify, user_name, user)
         if error_login:
-            self.render('signup.html', error_login=error_login, email=email, password=password, verify=verify, username=username)
+            self.render('signup.html', error_login=error_login, email=email, password=password, verify=verify, user_name=user_name,user=user)
         else:
-            u = User(username=username, email=email, password=password)
-            u.put()
-            h = make_secure_val(email)
-            self.response.headers.add_header('Set-Cookie', 'sername=%s; Path=/' % str(h))
+            User(user_name=user_name, email=email, password=password).put()
+            h = make_secure_val(user_name)
+            self.response.headers.add_header('Set-Cookie', 'user_name=%s; Path=/' % str(h))
             self.redirect('/')
 
 class Signin(Handler):
 
     def get(self):
-        username = self.request.cookies.get('username')
-        if not username:
+        user_name = self.request.cookies.get('user_name')
+        if not user_name:
             self.render('signin.html')
         else:
             self.redirect('/')
@@ -145,19 +149,19 @@ class Signin(Handler):
         email = self.request.get('email')
         password = self.request.get('password')
         user = db.GqlQuery("SELECT * FROM User WHERE email=:email",email=email).get()
-        username = user.username;
+        user_name = user.user_name;
 
         if (not user) or (password != user.password):
             self.render('signin.html', error_login = "Invalid mail or password.", email=email, password=password)
         else:
-            h = make_secure_val(username)
-            self.response.headers.add_header('Set-Cookie', 'username=%s; Path=/' % str(h))
+            h = make_secure_val(user_name)
+            self.response.headers.add_header('Set-Cookie', 'user_name=%s; Path=/' % str(h))
             self.redirect('/')
 
 class Signout(Handler):
 
     def get(self):
-        self.response.headers.add_header('Set-Cookie', 'username=;Path=/')
+        self.response.headers.add_header('Set-Cookie', 'user_name=;Path=/')
         self.redirect('/')
 
 app = webapp2.WSGIApplication([
