@@ -136,7 +136,7 @@ body {
 	color: #777;
 }
 
-.new-ranking {
+#new-ranking {
 	border-radius: 3px;
 	width: 400px;
 	height: auto;
@@ -144,7 +144,7 @@ body {
 	margin: 100px auto;
 }
 
-.ranking-title-input {
+#ranking-title-input {
 	margin: 0px;
 	width: 100%;
 	text-align: center;

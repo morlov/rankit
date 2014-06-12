@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+<head> 
+	<title>Rankit | Mikhail</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+
+<body>
+	<div id="content">
+		<div id="header">
+			<div class="header-logo">
+				<a href="/">RANKIT</a>
+			</div>
+			<div class="header-links">
+				<a href="/user/{{user_name}}">{{user_name}}</a>
+				<a href="/new">New ranking</a>
+				<a href="/signout">Signout</a>
+			</div>
+		</div>
+		<div id="dashboard">
+			{% for r in rankings %}
+			<div class="action">{{r.creator}} {{r.created.strftime("%b %d, %Y")}}</div>
+			<div class="ranking">
+				<div class="ranking-header">
+					<span class="ranking-title">{{r.title}}</span>
+				</div>
+				{% for i in items[r.key().id()] %}
+				<div class="ranking-item">
+					<span class="item-rank">{{i.item_rank}}</span>
+					<span class="item-name">{{i.item_name}}</span>
+				</div>
+				{% endfor %}
+				<div class="ranking-footer">
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</body>
+
+</html>

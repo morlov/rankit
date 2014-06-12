@@ -22,6 +22,7 @@ import re
 import hashlib
 import hmac
 import json
+import time
 
 from google.appengine.ext import db
 
@@ -34,24 +35,26 @@ def make_secure_val(s):
     return "%s|%s" % (s, hmac.new(secret, s).hexdigest())
 
 def check_secure_val(h):
-    val = h.split('|')[0]
-    if h == make_secure_val(val):
-        return val
+    if h:
+        val = h.split('|')[0]
+        if h == make_secure_val(val):
+            return val
 
 class User(db.Model):
 	user_name = db.StringProperty(required = True)
 	password = db.StringProperty(required = True)
-	email    = db.StringProperty(required = True)
-
-class Ranking(db.Model):
-	user_name  = db.StringProperty(required = True)
-	ranking_name = db.StringProperty(required = True)
-	item_name = db.StringProperty(required = True)
-	rank  = db.StringProperty(required = True)
+	email = db.StringProperty(required = True)
 
 class Item(db.Model):
-	item_name    = db.StringProperty(required = True)
-	content = db.StringProperty(required = True)
+    ranking_id = db.StringProperty(required = True)
+    item_rank = db.StringProperty(required = True)
+    item_name = db.StringProperty(required = True)
+    item_content = db.TextProperty(required = True)
+
+class Ranking(db.Model):
+    title = db.StringProperty(required = True)
+    created = db.DateTimeProperty(auto_now_add = True)
+    creator = db.StringProperty(required = True)
 
 class Handler(webapp2.RequestHandler):
     
@@ -69,23 +72,63 @@ class Main(Handler):
 
     def get(self):
         h = self.request.cookies.get('user_name')
-        if h:
-            user_name = check_secure_val(h)
-            if user_name:
-                self.render_main()
-        self.redirect("/signup")
+        if check_secure_val(h):
+            self.render_main()
+        else:
+            self.redirect("/signup")
 
-    def render_main(self):
-        #posts = db.GqlQuery("select * from Post order by created desc")        
-        #self.render("blog.html", posts=posts)
-        user_name = self.request.cookies.get('user_name')
-        self.render('main.html', user_name=user_name)
+    def render_main(self, **kwarg):
+        user_name = self.request.cookies.get('user_name').split("|")[0]
+        rankings = db.GqlQuery("select * from Ranking order by created desc limit 100")
+        items = {}
+        for r in rankings:
+            rid = r.key().id()
+            items[rid] = db.GqlQuery("select * from Item where ranking_id=:rid order by item_rank", rid=str(rid))
+        self.render("user.html", user_name=user_name, rankings=rankings, items=items)
 
 class New(Handler):
 
     def get(self):
-    	user_name = self.request.cookies.get('user_name').split('|')[0]
-        self.render("new.html",user_name=user_name)
+        h = self.request.cookies.get('user_name')
+        user_name = check_secure_val(h)
+        if user_name:
+            self.render("new.html",user_name=user_name)
+        else:
+            self.redirect("/signup")
+      
+    def post(self):
+        
+        h = self.request.cookies.get('user_name')
+        user_name = check_secure_val(h)
+        content = json.loads(self.request.get('content'))
+
+        title = content["title"]
+        
+        h = self.request.cookies.get('user_name')
+        user_name = check_secure_val(h)
+        
+        ranking = Ranking(creator=user_name, title=title)
+        ranking.put()
+        ranking_id = str(ranking.key().id())
+        
+        items = content["items"]
+        rank = 1
+        for i in items:
+            Item(item_rank=str(rank),item_name=i, item_content=i, ranking_id=ranking_id).put()
+            rank += 1
+        time.sleep(1)
+        self.redirect('/user/'+user_name)
+
+class UserPage(Handler):
+
+    def get(self, user_name):
+        rankings = db.GqlQuery("select * from Ranking where creator=:user_name order by created desc limit 100", user_name=user_name)
+        items = {}
+        for r in rankings:
+            rid = r.key().id()
+            items[rid] = db.GqlQuery("select * from Item where ranking_id=:rid order by item_rank", rid=str(rid))
+
+        self.render("user.html", user_name=user_name, rankings=rankings, items=items)
 
 class Sort(Handler):
 
@@ -133,7 +176,7 @@ class Signup(Handler):
         if error_login:
             self.render('signup.html', error_login=error_login, email=email, password=password, verify=verify, user_name=user_name,user=user)
         else:
-            User(user_name=user_name, email=email, password=password).put()
+            User(user_name=user_name, password=password, email=email).put()
             h = make_secure_val(user_name)
             self.response.headers.add_header('Set-Cookie', 'user_name=%s; Path=/' % str(h))
             self.redirect('/')
@@ -151,11 +194,10 @@ class Signin(Handler):
         email = self.request.get('email')
         password = self.request.get('password')
         user = db.GqlQuery("SELECT * FROM User WHERE email=:email",email=email).get()
-        user_name = user.user_name;
-
         if (not user) or (password != user.password):
             self.render('signin.html', error_login = "Invalid mail or password.", email=email, password=password)
         else:
+            user_name = user.user_name
             h = make_secure_val(user_name)
             self.response.headers.add_header('Set-Cookie', 'user_name=%s; Path=/' % str(h))
             self.redirect('/')
@@ -163,7 +205,7 @@ class Signin(Handler):
 class Signout(Handler):
 
     def get(self):
-        self.response.headers.add_header('Set-Cookie', 'Path=/')
+        self.response.headers.add_header('Set-Cookie', 'user_name=; Path=/')
         self.redirect('/')
 
 app = webapp2.WSGIApplication([
@@ -172,5 +214,6 @@ app = webapp2.WSGIApplication([
     ('/sort',    Sort),
     ('/signup',  Signup),
     ('/signin',  Signin),
-    ('/signout', Signout)
+    ('/signout', Signout),
+    ('/user/([a-zA-Z0-9_-]+)',  UserPage)
     ], debug=True)

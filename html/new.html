@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <script type='text/javascript' src='../js/script.js'></script>	
+    <script type='text/javascript' src='../js/script.js'></script>
 </head>
 
 <body>
@@ -17,14 +17,14 @@
 				<a href="/">RANKIT</a>
 			</div>
 			<div class="header-links">
-				<a href="/">{{user_name}}</a>
+				<a href="/user/{{user_name}}">{{user_name}}</a>
 			</div>
 		</div>
 
-		<form class="new-ranking" method="post">
+		<form id="new-ranking" method="post">
 			<div class="ranking-header">
 				<span class="ranking-title">
-					<input class="ranking-title-input" type="text" placeholder="Enter ranking title...">
+					<input id="ranking-title-input" type="text" placeholder="Enter ranking title...">
 				</span>
 			</div>
 			<div id="sortable">
@@ -35,8 +35,9 @@
 				</span>
 			</div>
 			<div class="ranking-footer">
-				<input class="post-ranking" type="button" value="Post" method="post">
-				<input class="post-ranking" type="button" value="Add" onclick="addItem()">		
+				<input type="hidden" value="" name="content">
+				<input id="submit-ranking" class="post-ranking" type="submit" value="Post">
+				<input id="add-item" class="post-ranking" type="button" value="Add">		
 			</div>
 		</form>
 	</div>

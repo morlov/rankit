@@ -13,73 +13,28 @@
 				<a href="/">RANKIT</a>
 			</div>
 			<div class="header-links">
-				<a href="/">{{user_name}}</a>
+				<a href="/user/{{user_name}}">{{user_name}}</a>
 				<a href="/new">New ranking</a>
 				<a href="/signout">Signout</a>
 			</div>
 		</div>
 		<div id="dashboard">
-			<div class="action">{{user_name}} 14:53</div>
+			{% for r in rankings %}
+			<div class="action">{{r.creator}} {{r.created.strftime("%b %d, %Y")}}</div>
 			<div class="ranking">
 				<div class="ranking-header">
-					<span class="ranking-title">The Top 5 Web Browsers</span>
+					<span class="ranking-title">{{r.title}}</span>
 				</div>
+				{% for i in items[r.key().id()] %}
 				<div class="ranking-item">
-					<span class="item-rank">1</span>
-					<span class="item-name">Mozilla Firefox</span>
+					<span class="item-rank">{{i.item_rank}}</span>
+					<span class="item-name">{{i.item_name}}</span>
 				</div>
-				<div class="ranking-item">
-					<span class="item-rank">2</span>
-					<span class="item-name">Google Chrome</span>
-				</div>
-				<div class="ranking-item">
-					<span class="item-rank">3</span>
-					<span class="item-name">Safari</span>
-				</div>
-				<div class="ranking-item">
-					<span class="item-rank">4</span>
-					<span class="item-name">Opera</span>
-				</div>
-				<div class="ranking-item">
-					<span class="item-rank">5</span>
-					<span class="item-name">Internet Explorer</span>
-				</div>
-				<div class="ranking-footer">
-				    <a href="/sort">
-					<input class="post-ranking" type="button" value="Sort" method="post">
-					</a>
-				</div>
-			</div>
-
-			<div class="action">{{username}} 14:53</div>
-			<div class="ranking">
-				<div class="ranking-header">
-					<span class="ranking-title">The Top 5 Web Browsers</span>
-				</div>
-				<div class="ranking-item">
-					<span class="item-rank">1</span>
-					<span class="item-name">Mozilla Firefox</span>
-				</div>
-				<div class="ranking-item">
-					<span class="item-rank">2</span>
-					<span class="item-name">Google Chrome</span>
-				</div>
-				<div class="ranking-item">
-					<span class="item-rank">3</span>
-					<span class="item-name">Safari</span>
-				</div>
-				<div class="ranking-item">
-					<span class="item-rank">4</span>
-					<span class="item-name">Opera</span>
-				</div>
-				<div class="ranking-item">
-					<span class="item-rank">5</span>
-					<span class="item-name">Internet Explorer</span>
-				</div>
+				{% endfor %}
 				<div class="ranking-footer">
 				</div>
 			</div>
-
+			{% endfor %}
 		</div>
 	</div>
 </body>
