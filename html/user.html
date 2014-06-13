@@ -13,7 +13,7 @@
 				<a href="/">RANKIT</a>
 			</div>
 			<div class="header-links">
-				<a href="/user/{{user_name}}">{{user_name}}</a>
+				<a href="/user/{{current_user_name}}">{{current_user_name}}</a>
 				<a href="/new">New ranking</a>
 				<a href="/signout">Signout</a>
 			</div>
@@ -32,6 +32,13 @@
 				</div>
 				{% endfor %}
 				<div class="ranking-footer">
+				{% if is_sorted %}
+					<input disabled class="post-ranking" type="button" value="Sort">
+				{% else %}
+					<a href="/sort/{{r.key().id()}}">
+						<input class="post-ranking" type="button" value="Sort">
+					</a>
+				{% endif %}
 				</div>
 			</div>
 			{% endfor %}

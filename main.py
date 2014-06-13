@@ -84,7 +84,7 @@ class Main(Handler):
         for r in rankings:
             rid = r.key().id()
             items[rid] = db.GqlQuery("select * from Item where ranking_id=:rid order by item_rank", rid=str(rid))
-        self.render("user.html", user_name=user_name, rankings=rankings, items=items)
+        self.render("main.html", user_name=user_name, rankings=rankings, items=items, is_sorted=False)
 
 class New(Handler):
 
@@ -116,25 +116,33 @@ class New(Handler):
         for i in items:
             Item(item_rank=str(rank),item_name=i, item_content=i, ranking_id=ranking_id).put()
             rank += 1
-        time.sleep(1)
+        time.sleep(0.5)
         self.redirect('/user/'+user_name)
 
 class UserPage(Handler):
 
     def get(self, user_name):
+
         rankings = db.GqlQuery("select * from Ranking where creator=:user_name order by created desc limit 100", user_name=user_name)
         items = {}
         for r in rankings:
             rid = r.key().id()
             items[rid] = db.GqlQuery("select * from Item where ranking_id=:rid order by item_rank", rid=str(rid))
 
-        self.render("user.html", user_name=user_name, rankings=rankings, items=items)
+        h = self.request.cookies.get('user_name')
+        current_user_name = check_secure_val(h)
+        self.render("user.html", user_name=user_name, rankings=rankings, items=items, is_sorted=True, current_user_name=current_user_name)
 
 class Sort(Handler):
 
-    def get(self):
+    def get(self, ranking_id):
     	user_name = self.request.cookies.get('user_name').split('|')[0]
-        self.render("sort.html", user_name=user_name)
+        ranking = Ranking.get_by_id(int(ranking_id))
+        if not ranking:
+            self.error(404)
+            return
+        items = db.GqlQuery("select * from Item where ranking_id=:rid order by item_rank", rid=ranking_id)
+        self.render("sort.html", user_name=user_name, items=items, ranking=ranking)
 
 USER_RE   = re.compile(r"^[a-zA-Z0-9_-]{3,20}$")
 PASS_RE   = re.compile(r"^.{3,20}$")
@@ -209,11 +217,11 @@ class Signout(Handler):
         self.redirect('/')
 
 app = webapp2.WSGIApplication([
-    ('/',        Main),
-    ('/new',     New),
-    ('/sort',    Sort),
-    ('/signup',  Signup),
-    ('/signin',  Signin),
+    ('/', Main),
+    ('/new', New),
+    ('/sort/([0-9]+)', Sort),
+    ('/signup', Signup),
+    ('/signin', Signin),
     ('/signout', Signout),
-    ('/user/([a-zA-Z0-9_-]+)',  UserPage)
+    ('/user/([a-zA-Z0-9_-]+)', UserPage)
     ], debug=True)

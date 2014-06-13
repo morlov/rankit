@@ -2,7 +2,7 @@
 
 <html>
 <head> 
-	<title>Rankit | Mikhail</title>
+	<title>Rankit | {{user_name}}</title>
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 
@@ -32,6 +32,13 @@
 				</div>
 				{% endfor %}
 				<div class="ranking-footer">
+				{% if is_sorted %}
+					<input disabled class="post-ranking" type="button" value="Sort">
+				{% else %}
+					<a href="/sort/{{r.key().id()}}">
+						<input class="post-ranking" type="button" value="Sort">
+					</a>
+				{% endif %}
 				</div>
 			</div>
 			{% endfor %}

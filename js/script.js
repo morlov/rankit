@@ -24,7 +24,7 @@ $(document).ready(function()
 	});
 
 	$("#submit-ranking").click(function()
-	{
+	{	
 		var content = {
 			title: $("#ranking-title-input").val(),
 			items: []  

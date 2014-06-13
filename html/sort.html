@@ -23,29 +23,15 @@
 
 		<form id="new-ranking" method="post">
 			<div class="ranking-header">
-				<span class="ranking-title">The Top 5 Web Browsers</span>
+				<span class="ranking-title">{{ranking.title}}</span>
 			</div>
 			<div id="sortable">
+				{% for i in items %}
 				<div class="ranking-item">
-					<span class="item-rank">1</span>
-					<span class="item-name">Mozilla Firefox</span>
+					<span class="item-rank">{{i.item_rank}}</span>
+					<span class="item-name">{{i.item_name}}</span>
 				</div>
-				<div class="ranking-item">
-					<span class="item-rank">2</span>
-					<span class="item-name">Google Chrome</span>
-				</div>
-				<div class="ranking-item">
-					<span class="item-rank">3</span>
-					<span class="item-name">Safari</span>
-				</div>
-				<div class="ranking-item">
-					<span class="item-rank">4</span>
-					<span class="item-name">Opera</span>
-				</div>
-				<div class="ranking-item">
-					<span class="item-rank">5</span>
-					<span class="item-name">Internet Explorer</span>
-				</div>
+				{% endfor %}
 			</div>
 			<div class="ranking-footer">
 			    <a href = "/">
