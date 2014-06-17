@@ -2,7 +2,7 @@
 
 <html>
 <head> 
-	<title>Rankit | {{user_name}}</title>
+	<title>Rankit | {{current_user_name}}</title>
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 
@@ -13,7 +13,7 @@
 				<a href="/">RANKIT</a>
 			</div>
 			<div class="header-links">
-				<a href="/user/{{user_name}}">{{user_name}}</a>
+				<a href="/user/{{current_user_name}}">{{current_user_name}}</a>
 				<a href="/new">New ranking</a>
 				<a href="/signout">Signout</a>
 			</div>
@@ -25,17 +25,17 @@
 				<div class="ranking-header">
 					<span class="ranking-title">{{r.title}}</span>
 				</div>
-				{% for i in items[r.key().id()] %}
+				{% for i in items[r.get_id()] %}
 				<div class="ranking-item">
-					<span class="item-rank">{{i.item_rank}}</span>
-					<span class="item-name">{{i.item_name}}</span>
+					<span class="item-rank">{{items[r.get_id()].index(i)+1}}</span>
+					<span class="item-name">{{i.name}}</span>
 				</div>
 				{% endfor %}
 				<div class="ranking-footer">
-				{% if is_sorted %}
-					<input disabled class="post-ranking" type="button" value="Sort">
+				{% if is_sorted[r.get_id()] %}
+					<input disabled class="post-ranking" type="button" value="Sorted">
 				{% else %}
-					<a href="/sort/{{r.key().id()}}">
+					<a href="/sort/{{r.get_id()}}">
 						<input class="post-ranking" type="button" value="Sort">
 					</a>
 				{% endif %}

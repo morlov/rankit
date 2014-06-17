@@ -25,15 +25,19 @@ $(document).ready(function()
 
 	$("#submit-ranking").click(function()
 	{	
-		var content = {
+		var ranking = {
 			title: $("#ranking-title-input").val(),
-			items: []  
+			item_ids: [],
+			item_names: [],
+			item_contents: []
 		};
 		$("#new-ranking").submit(function(event) {
 			$("#sortable").children().each(function(idx, val){
-				content.items.push($(this).find(".item-name").text());
+				ranking.item_ids.push($(this).find("#item-id").val());
+				ranking.item_names.push($(this).find(".item-name").text());
+				ranking.item_contents.push($(this).find(".item-name").text());
             });	
-			$("input[name='content']").val(JSON.stringify(content));
+			$("input[name='ranking']").val(JSON.stringify(ranking));
 		});
 	});
 });

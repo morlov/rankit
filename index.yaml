@@ -10,6 +10,23 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
+- kind: GroupChoice
+  properties:
+  - name: ranking_id
+  - name: rank
+
+- kind: GroupChoice
+  properties:
+  - name: ranking_id
+  - name: rank
+  - name: item_id
+
+- kind: Item
+  properties:
+  - name: name
+  - name: ranking_id
+  - name: ID
+
 - kind: Item
   properties:
   - name: ranking_id
@@ -25,4 +42,32 @@ indexes:
   properties:
   - name: user_name
   - name: created
+    direction: desc
+
+- kind: RankingHistory
+  properties:
+  - name: user
+  - name: rank
+
+- kind: RankingResult
+  properties:
+  - name: item_id
+  - name: ranking_id
+  - name: borda_count
+
+- kind: RankingResult
+  properties:
+  - name: ranking_id
+  - name: borda_count
+
+- kind: RankingResult
+  properties:
+  - name: ranking_id
+  - name: borda_count
+  - name: item_id
+
+- kind: RankingResult
+  properties:
+  - name: ranking_id
+  - name: borda_count
     direction: desc

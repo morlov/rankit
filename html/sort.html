@@ -28,16 +28,18 @@
 			<div id="sortable">
 				{% for i in items %}
 				<div class="ranking-item">
-					<span class="item-rank">{{i.item_rank}}</span>
-					<span class="item-name">{{i.item_name}}</span>
+					<span class="item-rank">{{items.index(i)+1}}</span>
+					<span class="item-name">{{i.name}}</span>
+					<input type="hidden" id="item-id" value="{{i.get_id()}}"/>
 				</div>
 				{% endfor %}
 			</div>
 			<div class="ranking-footer">
 			    <a href = "/">
-				<input class="post-ranking" type="button" value="Cancel">
+					<input class="post-ranking" type="button" value="Cancel">
 				</a>
-				<input class="post-ranking" type="button" value="Submit" method="post">
+				<input type="hidden" value="" name="ranking">
+				<input id="submit-ranking" class="post-ranking" type="submit" value="Submit">
 			</div>
 		</form>
 	</div>
