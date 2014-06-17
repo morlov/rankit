@@ -27,7 +27,8 @@
 				</div>
 				{% for i in items[r.get_id()] %}
 				<div class="ranking-item">
-					<span class="item-rank">{{items[r.get_id()].index(i)+1}}</span>
+					<!-- <span class="item-rank">{{items[r.get_id()].index(i)+1}}</span> -->
+					<span class="item-rank">{{loop.index}}</span>
 					<span class="item-name">{{i.name}}</span>
 				</div>
 				{% endfor %}
