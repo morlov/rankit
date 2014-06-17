@@ -52,7 +52,17 @@ indexes:
 - kind: RankingResult
   properties:
   - name: item_id
+  - name: borda_count
+
+- kind: RankingResult
+  properties:
+  - name: item_id
   - name: ranking_id
+  - name: borda_count
+
+- kind: RankingResult
+  properties:
+  - name: item_id=
   - name: borda_count
 
 - kind: RankingResult
@@ -71,3 +81,8 @@ indexes:
   - name: ranking_id
   - name: borda_count
     direction: desc
+
+- kind: RankingResult
+  properties:
+  - name: ranking_id=
+  - name: borda_count

@@ -31,7 +31,11 @@ def valid_signup(self, email, password, verify, user_name):
 class Signup(handler.Handler):
 
     def get(self):
-        self.render("signup.html")
+        user_name = self.request.cookies.get('user_name')
+        if not user_name:
+            self.render("signup.html")
+        else:
+            self.redirect('/')
 
     def post(self):
         

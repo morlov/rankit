@@ -79,7 +79,7 @@ body {
 	height: auto;
 	border: 1px solid #ccc;
 	margin-bottom: 15px;
-	/*box-shadow: 0 0 3px #aaa;*/
+	border-radius: 5px;
 }
 
 .ranking-header {
@@ -88,7 +88,6 @@ body {
 	height: 40px;
 	border: 1px solid #ccc;
 	margin:-1px -1px -1px -1px;
-	/*background: linear-gradient(to top, rgb(70,130,180), rgb(100,160,210)); */
 }
 
 .ranking-footer {
@@ -178,7 +177,7 @@ body {
 }
 
 .signup {
-	border-radius: 3px;
+	border-radius: 5px;
 	width: 300px;
 	height: auto;
 	border: 1px solid #ccc;

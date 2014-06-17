@@ -26,4 +26,4 @@ class SortRanking(handler.Handler):
 
         database.update_ranking_history(ranking_id, user_name, item_ids)
         database.update_ranking_result(ranking_id, item_ids)
-        self.redirect('/user/'+user_name)
+        self.redirect('/')

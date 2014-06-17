@@ -17,6 +17,6 @@ class NewRanking(handler.Handler):
         content = json.loads(self.request.get('ranking'))
         ranking_id, item_ids = database.add_new_ranking(content["title"], content["item_names"], content["item_contents"], user_name)
         database.update_ranking_history(ranking_id, user_name, item_ids)
-        database.update_ranking_result(ranking_id, item_ids)
+        database.init_ranking_result(ranking_id, item_ids)
         time.sleep(0.2)
-        self.redirect('/user/' + user_name)
+        self.redirect('/')
