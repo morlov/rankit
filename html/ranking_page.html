@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block head %}
+	<title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script type='text/javascript' src='../js/script.js'></script>
+{% endblock head %}
+
+{% block content %}
+
+<div id="new-ranking">
+	{% block ranking %} {% endblock ranking %}
+</div>
+
+<div class="comment">
+{% block comment %} {% endblock comment %}
+</div>
+
+{% endblock content %}

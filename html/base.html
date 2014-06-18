@@ -1,51 +1,36 @@
 <!DOCTYPE html>
 
 <html>
-{% block heas %}
 <head> 
-	<title>Rankit | {{current_user_name}}</title>
+	{% block head %}
+	<title>{% block title %}{% endblock title %}</title>
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    {% endblock head %}
 </head>
-{% endblock %}
 
 <body>
+	
+	<div id="header">
+		{% block header %}
+		<div class="header-logo">
+			{% block logo %} <a href="/">RANKIT</a> {% endblock logo %}
+		</div>
+
+		<div class="header-links">
+			<a href="/user/{{current_user_name}}">{{current_user_name}}</a>
+			<a href="/new">New ranking</a>
+			<a href="/signout">Signout</a>
+			</div>
+		</div>
+		{% endblock header %}
+	</div>
+
 	<div id="content">
-		<div id="header">
-			<div class="header-logo">
-				<a href="/">RANKIT</a>
-			</div>
-			<div class="header-links">
-				<a href="/user/{{current_user_name}}">{{current_user_name}}</a>
-				<a href="/new">New ranking</a>
-				<a href="/signout">Signout</a>
-			</div>
-		</div>
-		<div id="dashboard">
-			{% for r in rankings %}
-			<div class="action">{{r.creator}} {{r.created.strftime("%b %d, %Y")}}</div>
-			<div class="ranking">
-				<div class="ranking-header">
-					<span class="ranking-title">{{r.title}}</span>
-				</div>
-				{% for i in items[r.get_id()] %}
-				<div class="ranking-item">
-					<!-- <span class="item-rank">{{items[r.get_id()].index(i)+1}}</span> -->
-					<span class="item-rank">{{loop.index}}</span>
-					<span class="item-name">{{i.name}}</span>
-				</div>
-				{% endfor %}
-				<div class="ranking-footer">
-				{% if is_sorted[r.get_id()] %}
-					<input disabled class="post-ranking" type="button" value="Sorted">
-				{% else %}
-					<a href="/sort/{{r.get_id()}}">
-						<input class="post-ranking" type="button" value="Sort">
-					</a>
-				{% endif %}
-				</div>
-			</div>
-			{% endfor %}
-		</div>
+		{% block content %} {% endblock content %}
+	</div>
+
+	<div id="footer">
+		{% block footer %}{% endblock footer %}
 	</div>
 </body>
 

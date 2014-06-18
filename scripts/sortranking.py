@@ -19,6 +19,12 @@ class SortRanking(handler.Handler):
             self.redirect("/signup")
       
     def post(self, ranking_id):
+        
+        current_user_name = self.get_current_user()
+        
+        if database.is_ranking_sorted_by_user(rid, current_user_name):
+            self.redirect("/signup")
+
         ranking_id = int(ranking_id)
         user_name = self.get_current_user()
         content = json.loads(self.request.get('ranking'))
