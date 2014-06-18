@@ -1,48 +1,10 @@
-<!DOCTYPE html>
+{% extends "ranking_page.html" %}
+{% from "ranking.html" import render_ranking %}
 
-<html>
-<head> 
-	<title>Rankit | Sort</title>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <script type='text/javascript' src='../js/script.js'></script>
-</head>
+{% block title %} Rankit | Sort {% endblock title %}
 
-<body>
-	<div id="content">
-		<div id="header">
-			<div class="header-logo">
-				<a href="/">RANKIT</a>
-			</div>
-			<div class="header-links">
-				<a href="/user/{{user_name}}">{{user_name}}</a>
-			</div>
-		</div>
+{% block ranking %}
 
-		<form id="new-ranking" method="post">
-			<div class="ranking-header">
-				<span class="ranking-title">{{ranking.title}}</span>
-			</div>
-			<div id="sortable">
-				{% for i in items %}
-				<div class="ranking-item">
-					<span class="item-rank">{{items.index(i)+1}}</span>
-					<span class="item-name">{{i.name}}</span>
-					<input type="hidden" id="item-id" value="{{i.get_id()}}"/>
-				</div>
-				{% endfor %}
-			</div>
-			<div class="ranking-footer">
-			    <a href = "/">
-					<input class="post-ranking" type="button" value="Cancel">
-				</a>
-				<input type="hidden" value="" name="ranking">
-				<input id="submit-ranking" class="post-ranking" type="submit" value="Submit">
-			</div>
-		</form>
-	</div>
-</body>
+	{{ render_ranking(ranking, items, "sort", True) }}
 
-</html>
+{% endblock ranking %}

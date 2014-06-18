@@ -1,0 +1,40 @@
+{% macro render_ranking(ranking, items, display="main", is_sorted=True) %}
+
+<div class="ranking">
+	<div class="ranking-header">
+		<span class="ranking-title">
+			<a href = "/ranking/{{ranking.get_id()}}" class="ranking-ref">
+				{{ranking.title}}
+			</a>
+		</span>
+	</div>
+
+	<div class = "ranking-content" data-is-sorted="">
+		{% for item in items %}
+		<div class="ranking-item" data-item-id="{{item.get_id()}}">
+			<span class="item-rank">{{loop.index}}</span>
+			<span class="item-name">{{item.name}}</span>
+		</div>
+		{% endfor %}
+	</div>
+
+	<div class="ranking-footer">
+
+	{% if display == "main" %}
+
+	{% elif display == "sort" %}
+		<a href = "/">
+			<input class="post-ranking" type="button" value="Cancel">
+		</a>
+		<form method="post">
+			<input type="hidden" value="" name="ranking">
+			<input id="submit-ranking" class="post-ranking" type="submit" value="Submit">
+		</form>
+	{% else %}
+
+	{% endif %}
+
+	</div>
+</div>
+
+{% endmacro %}

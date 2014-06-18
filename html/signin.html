@@ -1,21 +1,23 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 
-<html>
-<head> 
-	<title>Rankit | Sign in </title>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
-</head>
+{% block title %} Rankit | Sign in {% endblock title %}
+
+{% block header %} 
+
+<div id="header">
+	<div class="header-logo">
+		<a href="/">RANKIT</a>
+	</div>
+	<div class="header-links">
+		<a href="/signup">Sign up</a>
+	</div>
+</div>
+
+{% endblock header %}
 
 <body>
 	<div id="content">
-		<div id="header">
-			<div class="header-logo">
-				<a href="/">RANKIT</a>
-			</div>
-			<div class="header-links">
-				<a href="/signup">Sign up</a>
-			</div>
-		</div>
+
 
 		<form class="signup" method="post">
 			<div class="signup-header">

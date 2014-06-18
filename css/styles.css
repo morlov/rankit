@@ -17,7 +17,6 @@ body {
 	min-height: 100%;
 	width: 100%;
 	margin: auto;
-	/*border: 1px dashed #777;*/
 }
 
 #header {
@@ -77,13 +76,21 @@ body {
 .ranking {
 	width: 400px;
 	height: auto;
-	border: 1px solid #ccc;
-	margin-bottom: 15px;
-	border-radius: 5px;
+	border: none;
+	margin-bottom: 25px;
+	margin-top: 5px;
+}
+
+.ranking-ref {
+	text-decoration: none;
+	color: #aaa;
+	font-size: 18px;
+	color: #555;
 }
 
 .ranking-header {
 	display: table;
+	border-radius: 10px 10px 0px 0px;
 	width: 400px;
 	height: 40px;
 	border: 1px solid #ccc;
@@ -92,19 +99,23 @@ body {
 
 .ranking-footer {
 	display: table;
+	border-radius: 0px 0px 10px 10px;
 	width: 100%;
-	height: 20px;
+	min-height: 25px;
 	border: 1px solid #ccc;
 	margin:-1px -1px -1px -1px;
 	background-color: #fff;
+}
+
+.ranking-content {
+	border: 1px solid #ccc;
+	margin:-1px -1px -1px -1px;
 }
 
 .ranking-title {
 	display: table-cell;
 	vertical-align: middle;
 	text-align: center;
-	font-size: 18px;
-	color: #555;
 }
 
 .ranking-item {
@@ -136,10 +147,8 @@ body {
 }
 
 #new-ranking {
-	border-radius: 3px;
 	width: 400px;
 	height: auto;
-	border: 1px solid #ccc;
 	margin: 100px auto;
 }
 
