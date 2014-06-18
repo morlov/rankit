@@ -3,7 +3,7 @@ import os
 import jinja2
 import secutils
 
-template_dir = os.path.join(os.path.dirname(__file__), '..\html')
+template_dir = os.path.join(os.path.dirname(__file__), '../html')
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), autoescape=True)
 
 class Handler(webapp2.RequestHandler):
