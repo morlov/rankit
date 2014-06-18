@@ -1,54 +1,43 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 
-<html>
-<head> 
-	<title>Rankit | Sign up</title>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
-</head>
+{% block title %} Rankit | Sign in {% endblock title %}
 
-<body>
-	<div id="content">
-		<div id="header">
-			<div class="header-logo">
-				<a href="/">RANKIT</a>
-			</div>
-			<div class="header-links">
-				<a href="/signin">Sign in</a>
-			</div>
-		</div>
+{% block links %} 
+<div class="header-links">
+	<a href="/signin">Sign in</a>
+</div>
+{% endblock links %}
 
-		<form class="signup" method="post">
-			<div class="signup-header">
-				<span class="signup-title">
-					Sign up
-				</span>
-			</div>
-			<div class="ranking-item">
-				<span class="item-name">
-					<input class="item-name-input" type="text" placeholder="Email" name='email' value="{{email}}">
-				</span>
-			</div>
-			<div class="ranking-item">
-				<span class="item-name">
-					<input class="item-name-input" type="password" placeholder="Password" name='password' value="{{password}}">
-				</span>
-			</div>
-			<div class="ranking-item">
-				<span class="item-name">
-					<input class="item-name-input" type="password" placeholder="Verify password" name='verify' value="{{verify}}">
-				</span>
-			</div>
-			<div class="ranking-item">
-				<span class="item-name">
-					<input class="item-name-input" type="text" placeholder="Username" name='user_name' value="{{user_name}}">
-				</span>
-			</div>
-			<div class="ranking-footer">
-				<input class="post-ranking" type="submit" value="OK">
-			</div>
-			<span class="signup-error">{{error_login}}</span>
-		</form>
+{% block content %}
+<form class="signup" method="post">
+	<div class="ranking-header">
+		<span class="signup-title">
+			Sign up
+		</span>
 	</div>
-</body>
-
-</html>
+	<div class="ranking-item">
+		<span class="item-name">
+			<input class="item-name-input" type="text" placeholder="Email" name='email' value="{{email}}">
+		</span>
+	</div>
+	<div class="ranking-item">
+		<span class="item-name">
+			<input class="item-name-input" type="password" placeholder="Password" name='password' value="{{password}}">
+		</span>
+	</div>
+	<div class="ranking-item">
+		<span class="item-name">
+			<input class="item-name-input" type="password" placeholder="Verify password" name='verify' value="{{verify}}">
+		</span>
+	</div>
+	<div class="ranking-item">
+		<span class="item-name">
+			<input class="item-name-input" type="text" placeholder="Username" name='user_name' value="{{user_name}}">
+		</span>
+	</div>
+	<div class="ranking-footer">
+		<input class="ranking-button" type="submit" value="OK">
+	</div>
+	<span class="signup-error">{{error_login}}</span>
+</form>
+{% endblock content %}

@@ -1,6 +1,10 @@
-{% macro render_ranking(ranking, items, display="main", is_sorted=True) %}
+{% extends "ranking_page.html" %}
 
-<div class="ranking">
+{% block title %} Rankit | Ranking {% endblock title %}
+
+{% block ranking %}
+
+	<div class="ranking">
 	<div class="ranking-header">
 		<span class="ranking-title">
 			<a href = "/ranking/{{ranking.get_id()}}" class="ranking-ref">
@@ -9,7 +13,7 @@
 		</span>
 	</div>
 
-	<div class = "ranking-content" data-is-sorted="">
+	<div class = "ranking-content">
 		{% for item in items %}
 		<div class="ranking-item" data-item-id="{{item.get_id()}}">
 			<span class="item-rank">{{loop.index}}</span>
@@ -19,22 +23,16 @@
 	</div>
 
 	<div class="ranking-footer">
-
-	{% if display == "main" %}
-
-	{% elif display == "sort" %}
-		<a href = "/">
-			<input class="post-ranking" type="button" value="Cancel">
-		</a>
-		<form method="post">
-			<input type="hidden" value="" name="ranking">
-			<input id="submit-ranking" class="post-ranking" type="submit" value="Submit">
-		</form>
-	{% else %}
-
-	{% endif %}
-
+		{% if is_sorted %}
+			<input id="sort-ranking" disabled class="ranking-button" type="button" value="Sorted">
+		{% else %}
+			<input id="sort-ranking" class="ranking-button" type="button" value="Sort">
+			<form id="post-ranking" method="post">
+				<input type="hidden" value="" name="ranking">
+				<input id="submit-ranking" class="ranking-button" type="submit" value="Post" style="display: none">
+			</form>
+		{% endif %}
 	</div>
 </div>
 
-{% endmacro %}
+{% endblock ranking %}

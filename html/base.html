@@ -17,11 +17,14 @@
 		</div>
 
 		<div class="header-links">
+			{% block links %}
 			<a href="/user/{{current_user_name}}">{{current_user_name}}</a>
 			<a href="/new">New ranking</a>
 			<a href="/signout">Signout</a>
 			</div>
+			{% endblock links %}
 		</div>
+
 		{% endblock header %}
 	</div>
 

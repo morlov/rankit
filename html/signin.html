@@ -2,45 +2,34 @@
 
 {% block title %} Rankit | Sign in {% endblock title %}
 
-{% block header %} 
+{% block links %} 
 
-<div id="header">
-	<div class="header-logo">
-		<a href="/">RANKIT</a>
-	</div>
-	<div class="header-links">
-		<a href="/signup">Sign up</a>
-	</div>
+<div class="header-links">
+	<a href="/signup">Sign up</a>
 </div>
 
-{% endblock header %}
+{% endblock links %}
 
-<body>
-	<div id="content">
-
-
-		<form class="signup" method="post">
-			<div class="signup-header">
-				<span class="signup-title">
-					Sign in
-				</span>
-			</div>
-			<div class="ranking-item">
-				<span class="item-name">
-					<input class="item-name-input" type="text" placeholder="Email" name="email" value="{{email}}">
-				</span>
-			</div>
-			<div class="ranking-item">
-				<span class="item-name">
-					<input class="item-name-input" type="password" placeholder="Password" name="password" value="{{password}}">
-				</span>
-			</div>
-			<div class="ranking-footer">
-				<input class="post-ranking" type="submit" value="OK">
-			</div>
-			<span class="signup-error">{{error_login}}</span>
-		</form>
+{% block content %}
+<form class="signup" method="post">
+	<div class="ranking-header">
+		<span class="signup-title">
+			Sign in
+		</span>
 	</div>
-</body>
-
-</html>
+	<div class="ranking-item">
+		<span class="item-name">
+			<input class="item-name-input" type="text" placeholder="Email" name="email" value="{{email}}">
+		</span>
+	</div>
+	<div class="ranking-item">
+		<span class="item-name">
+			<input class="item-name-input" type="password" placeholder="Password" name="password" value="{{password}}">
+		</span>
+	</div>
+	<div class="ranking-footer">
+		<input class="ranking-button" type="submit" value="OK">
+	</div>
+	<span class="signup-error">{{error_login}}</span>
+</form>
+{% endblock content %}

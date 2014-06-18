@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "ranking.html" import render_ranking %}
+{% from "render.html" import render_ranking %}
 
 {% block title %} Rankit | {{current_user_name}} {% endblock title %}
 
@@ -14,7 +14,7 @@
 			{{ranking.creator}} {{ranking.created.strftime("%b %d, %Y")}}
 		</div>
 
-		{{ render_ranking(ranking, items[ranking.get_id()], "main") }}
+		{{ render_ranking(ranking, items[ranking.get_id()]) }}
 		
 	{% endfor %}
 

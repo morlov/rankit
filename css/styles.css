@@ -91,7 +91,7 @@ body {
 .ranking-header {
 	display: table;
 	border-radius: 10px 10px 0px 0px;
-	width: 400px;
+	width: 100%;
 	height: 40px;
 	border: 1px solid #ccc;
 	margin:-1px -1px -1px -1px;
@@ -110,6 +110,7 @@ body {
 .ranking-content {
 	border: 1px solid #ccc;
 	margin:-1px -1px -1px -1px;
+	min-height: 30px;
 }
 
 .ranking-title {
@@ -174,7 +175,7 @@ body {
 	border: none;
 }
 
-.post-ranking {
+.ranking-button {
 	float: right;
 	color: #555;
 	border: 1px solid #ccc;
@@ -186,14 +187,13 @@ body {
 }
 
 .signup {
-	border-radius: 5px;
 	width: 300px;
 	height: auto;
-	border: 1px solid #ccc;
 	margin: 100px auto;
 }
 
 .signup-header {
+	s
 	display: table;
 	width: 100%;
 	height: 40px;

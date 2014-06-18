@@ -1,0 +1,28 @@
+{% macro render_ranking(ranking, items) %}
+
+<div class="ranking">
+	<div class="ranking-header">
+		<span class="ranking-title">
+			<a href = "/ranking/{{ranking.get_id()}}" class="ranking-ref">
+				{{ranking.title}}
+			</a>
+		</span>
+	</div>
+
+	<div class = "ranking-content" data-is-sorted="">
+		{% for item in items %}
+		<div class="ranking-item" data-item-id="{{item.get_id()}}">
+			<span class="item-rank">{{loop.index}}</span>
+			<span class="item-name">{{item.name}}</span>
+		</div>
+		{% endfor %}
+	</div>
+
+	<div class="ranking-footer">
+	</div>
+</div>
+
+{% endmacro %}
+
+{% macro render_input() %}
+{% endmacro %}
