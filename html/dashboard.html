@@ -5,13 +5,18 @@
 
 {% block content %}
 
+{% block sidenav %}
+	<div id="sidenav"> 
+	</div>
+{% endblock sidenav %}
 <div id="dashboard">
+
 	{% block dashboard %}
 	
 	{% for ranking in rankings %}
 
 		<div class="action">
-			{{ranking.creator}} {{ranking.created.strftime("%b %d, %Y")}}
+			<a href='/user/{{ranking.creator}}'>{{ranking.creator}}</a>, {{ranking.created.strftime("%b %d, %Y")}}
 		</div>
 
 		{{ render_ranking(ranking, items[ranking.get_id()]) }}

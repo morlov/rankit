@@ -2,23 +2,25 @@ $(document).ready(function()
 {	
 
 	$(function() {
-		$(".ranking-content").sortable({evert: true, 
+		$(".ranking-content").sortable({revert: 200, 
 			update: function(event, ui) {
-	        var i = 1
-	        $(this).children().each(function(idx, val){
-				$(this).find(">:first-child").html(i);
-	            	i++; 
-	            	});	
-				}
+	        	var i = 1
+	        	$(this).children().each(function(idx, val){
+					$(this).find(">:first-child").html(i++);
+	            });	
+			}
 			});
 		$(".ranking-content").sortable("disable");
 		$(".ranking-content").disableSelection();
 	});
 
+	var cached_ranking_content = $(".ranking-content").html();
+
 	$("#sort-ranking").click(function(){
 		if($("#sort-ranking").val() === "Cancel") {
 		  	$(".ranking-content").sortable("disable");
 		  	$("#sort-ranking").val("Sort");
+    		$(".ranking-content").html(cached_ranking_content).sortable("refresh");
 		}
 		else {
 		 	$(".ranking-content").sortable("enable");

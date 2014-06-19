@@ -34,4 +34,4 @@ class RankingPage(handler.Handler):
 
         database.update_ranking_history(ranking_id, user_name, item_ids)
         database.update_ranking_result(ranking_id, item_ids)
-        self.redirect('/')
+        self.redirect('/ranking/'+str(ranking_id))
