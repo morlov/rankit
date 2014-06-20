@@ -17,14 +17,14 @@ $(document).ready(function()
 	var cached_ranking_content = $(".ranking-content").html();
 
 	$("#sort-ranking").click(function(){
-		if($("#sort-ranking").val() === "Cancel") {
+		if($(this).val() === "Cancel") {
 		  	$(".ranking-content").sortable("disable");
-		  	$("#sort-ranking").val("Sort");
+		  	$(this).val("Sort");
     		$(".ranking-content").html(cached_ranking_content).sortable("refresh");
 		}
 		else {
 		 	$(".ranking-content").sortable("enable");
-		  	$("#sort-ranking").val("Cancel");
+		  	$(this).val("Cancel");
 		};
 		$("#submit-ranking").toggle("slow", function(){});
 	});
@@ -54,5 +54,13 @@ $(document).ready(function()
         });	
 		$("input[name='ranking']").val(JSON.stringify(ranking));
 		$("#submit-ranking").attr("disabled","disabled");
+	});
+
+	$(".ranking-item").hover( 
+		function() {
+		$(this).css('background-color','#fbfdfe')
+	},
+	 	function() { 
+	 	$(this).css('background-color','#fff')
 	});
 });
