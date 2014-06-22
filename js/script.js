@@ -6,7 +6,7 @@ $(document).ready(function()
 			update: function(event, ui) {
 	        	var i = 1
 	        	$(this).children().each(function(idx, val){
-					$(this).find(">:first-child").html(i++);
+					$(this).find(".item-rank").html(i++);
 	            });	
 			}
 			});
@@ -30,14 +30,25 @@ $(document).ready(function()
 	});
 
 	var i = 1;
-	$("#add-item").click(function(){
+	$("#add-item").on('click', function(){
 		$(".ranking-content").sortable("enable");
-		var item_text = $("#item-text").val()
-		if(item_text != '') {
-			var item_html = "<span class='item-rank'>" + (i++) + "</span> <span class='item-name'>" + item_text + "</span>";
-			$("<div class='ranking-item' data-item-id=''>" + item_html + "</div>").appendTo($(".ranking-content"));
-			$("#item-text").val("")
-		}
+		var item_name = $("#item-text").val();
+		var item_content = "";
+		if(item_name != '') {
+		 	var new_item =
+		 		'<div class="item">' +
+		 			'<div class="ranking-item" data-item-id=""> ' + 
+		 				'<span class="item-rank">' + (i++) +'</span>' +
+						'<span class="item-name">' + item_name + '</span> ' +
+		 				'<button class="ranking-button open">show</button>' +
+		 			'</div>' +
+		 			'<div class="item-content">' +
+		 				'<span class="item-body">' + item_content + '</span> ' +
+		 			'</div> ' +
+		 		'</div> ';
+			$(new_item).appendTo($(".ranking-content"));
+			$("#item-text").val("");
+		}      
 	});
 	
 	$("#post-ranking").submit(function(event) {
@@ -50,17 +61,34 @@ $(document).ready(function()
 		$(".ranking-content").children().each(function(idx, val){
 			ranking.item_ids.push($(this).data("item-id"));
 			ranking.item_names.push($(this).find(".item-name").text());
-			ranking.item_contents.push($(this).find(".item-name").text());
+			ranking.item_contents.push($(this).find(".item-content").text());
         });	
 		$("input[name='ranking']").val(JSON.stringify(ranking));
 		$("#submit-ranking").attr("disabled","disabled");
 	});
 
-	$(".ranking-item").hover( 
+
+	$(".ranking-content").on('click', ".ranking-button.open", 
 		function() {
-		$(this).css('background-color','#fbfdfe')
-	},
-	 	function() { 
-	 	$(this).css('background-color','#fff')
+			$(this).closest(".item").find(".item-content").slideToggle();
+			if($(this).html()==="show") {
+				$(this).html("hide");
+			}
+		else {
+			$(this).html("show");
+		}
 	});
+
+	$(".ranking-content").on('mouseenter', ".ranking-item",
+		function() {
+		$(this).css('background-color','#edf3f8');
+		$(this).find(".ranking-button.open").show();
+	});
+
+	$(".ranking-content").on('mouseleave', ".ranking-item",
+	 	function() { 
+	 	$(this).css('background-color','#fff');
+	 	$(this).find(".ranking-button.open").hide();
+	});
+
 });

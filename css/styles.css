@@ -2,31 +2,27 @@ html, body {
 	height: auto;
 	min-height: 100%;
 	font-family: Sans-serif;
-	/*border: 1px dashed #ccc;*/
 }
 
 body {
 	min-width: 900px;
 	width: 100%;
 	margin: 0px;
-	background-color: #b5cee2;
-	background: linear-gradient(to top, #fbfdfe, #b5cee2);
-	/*border: 1px dashed #555;*/
+	/*background-color: #fbfdfe;*/
+	background: linear-gradient(to top, #99bbd7, #6e9ec7);
 }
 
 #content {
 	height: auto;
 	min-height: 100%;
-	width: 840px;
+	width: 900px;
 	margin: auto;
-	/*border: 1px dashed #555;*/
 }
 
 #header {
 	width: 100%;
 	height: 60px;
 	margin: auto;
-	/*border: 1px solid #ccc;*/
 	border-top: none;
 	background-color: #fff;
 }
@@ -65,29 +61,48 @@ body {
 	float: right;
 	height: auto;
 	min-height: 100%;
-	width: 500px;
+	width: 625px;
 	margin: 25px auto;
-	padding: 25px 30px 0px 30px;
+	padding: 25px 15px 0px 15px;
 	/*border: 1px solid #ccc;*/
 	border-radius: 6px;
 	/*background-color: #fff;*/
 	background: linear-gradient(to bottom, #dfeaf3, #b5cee2);
 }
 
-#sidenav {
-	height: 400px;
-	width: 250px;
+#leftcolumn {
+	width: 220px;
 	float: left;
 	margin: 25px auto;
-	/*border: 1px solid #ccc;*/
+}
+
+.ranking.sidenav {
+	width: 100%;
+}
+
+.ranking-header.sidenav {
+	height: 106px;
+}
+
+.ranking-footer.sidenav {
+	height: 30px;
+	background-color: #fff;
+}
+
+.ranking-avatar.sidenav {
+	background-color: #fff;
+	margin: 12px 15px auto;
+	width: 80px;
+	height: 80px;
 	border-radius: 6px;
-	background-color: #fff
 }
 
 .action {
+	width: 100%;
 	text-align: right;
 	color: #777;
-	font-size: 16px;
+	font-size: 12px;
+	margin-bottom: 4px;
 }
 
 .action a {
@@ -96,23 +111,35 @@ body {
 }
 
 .ranking {
-	width: 100%;
+	width: 546px;
+	float: right;
 	border-radius: 6px;
-	border: 1px solid #ddd;
 	height: auto;
 	border: none;
-	margin-bottom: 35px;
-	margin-top: 5px;
+}
+
+.ranking-container {
+	width: 100%;
+	display: block;
+	overflow: auto;
+	margin-bottom: 20px;
+}
+
+.ranking-avatar {
+	width: 64px;
+	height: 64px;
+	border-radius: 6px;
+	float: left;
 	background-color: #fff;
 }
 
 .ranking-ref {
 	float: left;
-	margin-left: 40px;
+	margin-left: 30px;
 	text-decoration: none;
 	color: #fff;
 	font-style: bold;
-	font-size: 28px;
+	font-size: 18px;
 	color: #fff;
 }
 
@@ -120,7 +147,7 @@ body {
 	display: table;
 	border-radius: 6px 6px 0px 0px;
 	width: 100%;
-	height: 56px;
+	height: 36px;
 	background-color: #4682b4;
 	border-bottom: 1px solid #ccc;
 }
@@ -134,7 +161,7 @@ body {
 .ranking-item {
 	display: table;
 	width: 100%;
-	height: 40px;
+	height: 30px;
 	border-top: 1px solid #ccc;
 	border-bottom: 1px solid #ccc;
 	background-color: #fff;
@@ -145,23 +172,22 @@ body {
 	display: table;
 	border-radius: 0px 0px 6px 6px;
 	width: 100%;
-	height: 46px;
-	background-color: #fbfdfe;
+	height: 36px;
+	background-color: #edf3f8;
 	border-top: 1px solid #ccc;
 }
 
 .ranking-content {
-	min-height: 30px;
 	background-color: #edf3f8;
 }
 
 .item-rank {
-	height: 40px;
-	width: 40px;
+	height: 30px;
+	width: 30px;
 	display: table-cell;
 	vertical-align: middle;
 	text-align: center;
-	font-size: 24px;
+	font-size: 18px;
 	font-style: bold;
 	color: #aaa;
 	border-right: solid #ccc 1px;
@@ -173,8 +199,15 @@ body {
 	vertical-align: middle;
 	text-align: left;
 	padding-left: 15px;
-	font-size: 18px;
+	font-size: 14px;
 	color: #777;
+}
+
+.item-content {
+	background-color: #fff;
+	height: 200px;
+	border-top: 1px solid #ccc;
+	display: none;
 }
 
 #new-ranking {
@@ -192,6 +225,16 @@ body {
 	box-sizing: border-box;
 	border: none;
 	background: none;
+}
+
+.new-ranking-item {
+	display: table;
+	width: 100%;
+	height: 30px;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	background-color: #fff;
+	margin:-1px 0px -1px 0px;
 }
 
 .item-name-input {
@@ -214,7 +257,22 @@ body {
 	border-radius: 5px;
 	width: 80px;
 	height: 30px;
-	background: #46b4af; /*#4682b4;*/
+	background: #bec2c5;
+}
+
+.ranking-button.open {
+	width: 50px;
+	height: 20px;
+	font-size: 10px;
+	display: none;
+	color: #ccc;
+	border: 1px solid #bec2c5;
+	background: none;
+	margin: 5px;
+}
+
+.ranking-button.post {
+	background: #4682b4;
 }
 
 .signup {

@@ -15,9 +15,15 @@
 
 	<div class = "ranking-content">
 		{% for item in items %}
-		<div class="ranking-item" data-item-id="{{item.get_id()}}">
-			<span class="item-rank">{{loop.index}}</span>
-			<span class="item-name">{{item.name}}</span>
+		<div class="item">
+			<div class="ranking-item" data-item-id="{{item.get_id()}}">
+				<span class="item-rank">{{loop.index}}</span>
+				<span class="item-name">{{item.name}}</span>
+				<button class="ranking-button open">show</button>
+			</div>
+			<div class="item-content">
+				<span class="item-name"></span>
+			</div>
 		</div>
 		{% endfor %}
 	</div>
@@ -29,7 +35,7 @@
 			<input id="sort-ranking" class="ranking-button" type="button" value="Sort">
 			<form id="post-ranking" method="post">
 				<input type="hidden" value="" name="ranking">
-				<input id="submit-ranking" class="ranking-button" type="submit" value="Post" style="display: none">
+				<input id="submit-ranking" class="ranking-button post" type="submit" value="Post" style="display: none">
 			</form>
 		{% endif %}
 	</div>

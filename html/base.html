@@ -6,6 +6,7 @@
 	<title>{% block title %}{% endblock title %}</title>
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
     {% endblock head %}
+    <meta charset="utf-8">
 </head>
 
 <body>
@@ -15,7 +16,7 @@
 		<div class="header-logo">
 			{% block logo %} <a href="/">RANKIT</a> {% endblock logo %}
 		</div>
-
+		<!-- <div> <input type="search" placeholder="Search..."/></div> -->
 		<div class="header-links">
 			{% block links %}
 			<a href="/user/{{current_user_name}}">{{current_user_name}}</a>
