@@ -63,10 +63,8 @@ body {
 	min-height: 100%;
 	width: 625px;
 	margin: 25px auto;
-	padding: 25px 15px 0px 15px;
-	/*border: 1px solid #ccc;*/
+	padding: 25px 15px 0px 25px;
 	border-radius: 6px;
-	/*background-color: #fff;*/
 	background: linear-gradient(to bottom, #dfeaf3, #b5cee2);
 }
 
@@ -118,6 +116,10 @@ body {
 	border: none;
 }
 
+.ranking:hover {
+	box-shadow: 0 0 10px 0px rgba(0,0,0,0.5);
+}
+
 .ranking-container {
 	width: 100%;
 	display: block;
@@ -137,10 +139,13 @@ body {
 	float: left;
 	margin-left: 30px;
 	text-decoration: none;
-	color: #fff;
 	font-style: bold;
 	font-size: 18px;
 	color: #fff;
+}
+
+.ranking-ref:hover {
+	color: #ddd;
 }
 
 .ranking-header {
@@ -260,6 +265,10 @@ body {
 	background: #bec2c5;
 }
 
+.ranking-button:hover {
+	background: #d3d5d7;
+}
+
 .ranking-button.open {
 	width: 50px;
 	height: 20px;
@@ -273,6 +282,10 @@ body {
 
 .ranking-button.post {
 	background: #4682b4;
+}
+
+.ranking-button.post:hover {	
+	background: #99bbd7;
 }
 
 .signup {
