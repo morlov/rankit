@@ -15,9 +15,17 @@
 	
 	{% for ranking in rankings %}
 	
+		<div class="action">
+			<a href='/user/{{ranking.creator}}'>{{ranking.creator}}</a>, {{ranking.created.strftime("%b %d, %Y")}}
+		</div>
+
+		<div class="ranking-container">
+
+		<div class="ranking-avatar"> </div>
+
 		{{ render_ranking(ranking, items[ranking.get_id()]) }}
 		
-
+		</div>
 	{% endfor %}
 
 	{% endblock dashboard %}

@@ -2,15 +2,21 @@ html, body {
 	height: auto;
 	min-height: 100%;
 	font-family: Sans-serif;
-	border: 1px solid #111;
 }
 
 body {
 	min-width: 900px;
 	width: 100%;
 	margin: 0px;
+	/*background-color: #fbfdfe;*/
 	background: linear-gradient(to top, #99bbd7, #6e9ec7);
-	border: 1px dashed #555;
+}
+
+#content {
+	height: auto;
+	min-height: 100%;
+	width: 900px;
+	margin: auto;
 }
 
 #header {
@@ -51,35 +57,25 @@ body {
 	color: #aaa;
 }
 
-#wrapper {
-	clear: both;
-	margin: auto;
-	width: 920px;
-	padding: 25px;
-	border: 1px dashed #555;
-}
-
-#content {
-	width: 100%;
-	overflow: auto;
-	border: 1px dashed #999;
-}
-
 #dashboard {
 	float: right;
-	border-radius: 6px;
+	height: auto;
+	min-height: 100%;
 	width: 625px;
+	margin: 25px auto;
+	padding: 25px 15px 0px 25px;
+	border-radius: 6px;
 	background: linear-gradient(to bottom, #dfeaf3, #b5cee2);
-
 }
 
 #leftcolumn {
+	width: 220px;
 	float: left;
+	margin: 25px auto;
 }
 
 .ranking.sidenav {
-	width: 180px;
-	margin: 0px;
+	width: 100%;
 }
 
 .ranking-header.sidenav {
@@ -93,6 +89,7 @@ body {
 
 .ranking-avatar.sidenav {
 	background-color: #fff;
+	margin: 12px 15px auto;
 	width: 80px;
 	height: 80px;
 	border-radius: 6px;
@@ -100,28 +97,34 @@ body {
 
 .action {
 	width: 100%;
-	overflow: auto;
-	border: 1px dashed #000;
+	text-align: right;
+	color: #777;
+	font-size: 12px;
+	margin-bottom: 4px;
 }
 
 .action a {
 	color: #777;
-	text-align: right;
-	color: #777;
-	font-size: 12px;
 	text-decoration: none;
 }
 
-.ranking-container {
-	width: 100%;
-	overflow: auto;
-	display: block;
-	border: 1px dashed #000;
-	padding: 16px;
+.ranking {
+	width: 546px;
+	float: right;
+	border-radius: 6px;
+	height: auto;
+	border: none;
 }
 
 .ranking:hover {
 	box-shadow: 0 0 10px 0px rgba(0,0,0,0.5);
+}
+
+.ranking-container {
+	width: 100%;
+	display: block;
+	overflow: auto;
+	margin-bottom: 20px;
 }
 
 .ranking-avatar {
@@ -130,13 +133,6 @@ body {
 	border-radius: 6px;
 	float: left;
 	background-color: #fff;
-}
-
-.ranking {
-	float: left;
-	width: 100%;
-	border-radius: 6px;
-	border: none;
 }
 
 .ranking-ref {
@@ -204,20 +200,13 @@ body {
 
 .item-name {
 	display: table-cell;
+	font-family: Sans-serif;
 	vertical-align: middle;
 	text-align: left;
 	padding-left: 15px;
-	font-size: 16px;
-	color: #777;
-}
-
-/*.footer-links {
-	display: table-cell;
-	vertical-align: middle;
-	width: 30px;
 	font-size: 14px;
 	color: #777;
-}*/
+}
 
 .item-content {
 	background-color: #fff;

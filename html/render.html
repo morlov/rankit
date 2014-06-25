@@ -1,35 +1,27 @@
 {% macro render_ranking(ranking, items) %}
 
-<div class="ranking-container">
-
-	<div class="ranking-avatar"> </div>
-
-	<div class="ranking">
-		<div class="ranking-header">
-			<span class="ranking-title">
-				<a href = "/ranking/{{ranking.get_id()}}" class="ranking-ref">
-					{{ranking.title}}
-				</a>
-			</span>
-		</div>
-
-		<div class = "ranking-content">
-			{% for item in items %}
-			<div class="item">
-				<div class="ranking-item" data-item-id="{{item.get_id()}}">
-					<span class="item-rank">{{loop.index}}</span>
-					<span class="item-name">{{item.name}}</span>
-				</div>
-			</div>
-			{% endfor %}
-		</div>
-
-		<div class = "ranking-footer">
-			<!-- <span class="footer-links">vote</span> 
-			<span class="footer-links">like</span>
-			<span class="footer-links">comment</span> -->
-		</div> 
+<div class="ranking">
+	<div class="ranking-header">
+		<span class="ranking-title">
+			<a href = "/ranking/{{ranking.get_id()}}" class="ranking-ref">
+				{{ranking.title}}
+			</a>
+		</span>
 	</div>
 
+	<div class = "ranking-content">
+		{% for item in items %}
+		<div class="item">
+			<div class="ranking-item" data-item-id="{{item.get_id()}}">
+				<span class="item-rank">{{loop.index}}</span>
+				<span class="item-name">{{item.name}}</span>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+
+	<div class = "ranking-footer">
+	</div>
 </div>
+
 {% endmacro %}
