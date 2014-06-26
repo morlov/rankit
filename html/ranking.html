@@ -15,14 +15,14 @@
 
 	<div class = "ranking-content">
 		{% for item in items %}
-		<div class="item">
-			<div class="ranking-item" data-item-id="{{item.get_id()}}">
+		<div class="item" data-item-id="{{item.get_id()}}">
+			<div class="ranking-item">
 				<span class="item-rank">{{loop.index}}</span>
 				<span class="item-name">{{item.name}}</span>
 				<button class="ranking-button open">show</button>
 			</div>
 			<div class="item-content">
-				<span class="item-name"></span>
+				<span class="item-name">{{item.content}}</span>
 			</div>
 		</div>
 		{% endfor %}

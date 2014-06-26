@@ -30,6 +30,7 @@ class RankingPage(handler.Handler):
 
         user_name = self.get_current_user()
         content = json.loads(self.request.get('ranking'))
+        self.response.out.write(content)
         item_ids = [int(i) for i in content["item_ids"]]
 
         database.update_ranking_history(ranking_id, user_name, item_ids)

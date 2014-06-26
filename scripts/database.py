@@ -24,8 +24,8 @@ def add_new_user(user_name, password, email):
  
 class Item(Entity):
     creator = db.StringProperty(required = True)
-    name = db.StringProperty(required = True)
-    content = db.TextProperty(required = True)
+    name = db.StringProperty(required = False)
+    content = db.TextProperty(required = False)
 
 def add_new_item(name, content, creator):
     item = Item(name=name, content=content, creator=creator)
@@ -33,7 +33,7 @@ def add_new_item(name, content, creator):
     return item.get_id()
 
 class Ranking(Entity):
-    title = db.StringProperty(required = True)
+    title = db.StringProperty(required = False)
     created = db.DateTimeProperty(auto_now_add = True)
     creator = db.StringProperty(required = True)
 

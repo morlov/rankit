@@ -7,26 +7,19 @@
 
 	<div class="ranking">
 		<div class="ranking-header">
-			<span class="ranking-title">
-				<input id="ranking-title-input" type="text" placeholder="Enter ranking title...">
-			</span>
+			<input required id="ranking-title-input" type="text" placeholder="Enter ranking title...">
 		</div>
 
 		<div class="ranking-content">
 		</div>
 
 		<div class="new-ranking-item">
-			<span class="item-name">
-				<input class="item-name-input" type="text" placeholder="Enter item name and press add..." id="item-text">
-			</span>
-
-			<span class="item-content">
-				<input class="item-name-input" type="text" placeholder="Type here..." id="item-content">
-			</span>
+			<input required class="item-name-input" type="text" placeholder="Enter item name and press add..." id="item-text">
+			<textarea class="item-content-input" type="text" placeholder="Type here..." id="item-content"></textarea>
 		</div>
 
 		<div class="ranking-footer">
-			<form id="post-ranking" method="post">
+			<form id="post-new-ranking" method="post">
 				<input type="hidden" value="" name="ranking">
 				<input id="submit-ranking" class="ranking-button post" type="submit" value="Post">
 			</form>
