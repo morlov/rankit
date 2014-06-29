@@ -74,8 +74,12 @@ body {
 
 .ranking.sidenav {
 	width: 100%;
+	margin: 0px;
 }
 
+.ranking.sidenav:hover {
+	box-shadow: none;
+}
 .ranking-header.sidenav {
 	height: 106px;
 }
@@ -106,8 +110,8 @@ body {
 }
 
 .ranking {
-	margin: 5px;
-	width: 536px;
+	margin: 7px;
+	width: 520px;
 	float: right;
 	border-radius: 7px;
 	height: auto;
@@ -129,7 +133,7 @@ body {
 	width: 64px;
 	height: 64px;
 	border-radius: 6px;
-	margin: 5px;
+	margin: 7px;
 	float: left;
 	background-color: #fff;
 	border: 1px solid #ccc;

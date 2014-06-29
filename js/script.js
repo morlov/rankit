@@ -63,8 +63,10 @@ $(document).ready(function()
 		$("#submit-ranking").attr("disabled","disabled");
 	});
 
-	$("#post-new-ranking").submit(function(event) {
+	$("#post-new-ranking").on('submit', function(event) {
+		
 		var ranking = {
+		
 		title: $("#ranking-title-input").val(),
 		item_names: [],
 		item_contents: []
